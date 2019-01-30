@@ -1,0 +1,22 @@
+box: combient/java-mvn
+build:
+  services:
+    - id: petclinic
+  steps:
+    - script:
+        code: 'mvn package'
+    - internal/docker-build:
+        dockerfile: Dockerfile
+        image-name: petclinic-wercker-spinnaker
+push:
+    debug:
+    - script:
+        code: echo ${WERCKER_GIT_COMMIT}
+    - internal/docker-push:
+        # specify the image to be pushed - this is the one we created earlier
+        image-name: petclinic-wercker-spinnaker
+	tag: ${WERCKER_GIT_COMMIT} latest
+        username: $USERNAME # Registry username
+        password: $PASSWORD # Registry password
+        registry: https://hub.docker.com
+        repository: $USERNAME/petclinic-wercker-spinnaker

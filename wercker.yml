@@ -1,7 +1,5 @@
 box: openjdk:8-jdk
 build:
-  services:
-    - id: petclinic
   steps:
     - java/maven:
       goals: install

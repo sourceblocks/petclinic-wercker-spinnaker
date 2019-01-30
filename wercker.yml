@@ -9,7 +9,7 @@ build:
         dockerfile: Dockerfile
         image-name: petclinic-wercker-spinnaker
 push:
-    debug:
+  steps:
     - script:
         code: echo ${WERCKER_GIT_COMMIT}
     - internal/docker-push:

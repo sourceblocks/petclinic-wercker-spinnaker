@@ -1,8 +1,8 @@
 box: openjdk:8-jdk
 build:
   steps:
-    - wercker/maven:
-      goals: install
+    - java/maven:
+      goals: package
       cache_repo: true
       version: 3.5.2
     - internal/docker-build:

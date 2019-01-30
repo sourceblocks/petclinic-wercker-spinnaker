@@ -4,7 +4,7 @@ build:
     - id: petclinic
   steps:
     - java/maven:
-      goals: package
+      goals: install
       cache_repo: true
       version: 3.5.2
     - internal/docker-build:
@@ -17,7 +17,7 @@ push:
     - internal/docker-push:
         # specify the image to be pushed - this is the one we created earlier
         image-name: petclinic-wercker-spinnaker
-	tag: ${WERCKER_GIT_COMMIT} latest
+        tag: ${WERCKER_GIT_COMMIT} latest
         username: $USERNAME # Registry username
         password: $PASSWORD # Registry password
         registry: https://hub.docker.com

@@ -1,5 +1,5 @@
-box: openjdk:8-jdk
 build:
+  box: openjdk:8-jdk
   steps:
     - wercker/maven:
       goals: package -DskipTests

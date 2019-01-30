@@ -9,6 +9,7 @@ build:
         dockerfile: Dockerfile
         image-name: petclinic-wercker-spinnaker
 push:
+  box: openjdk:8-jdk
   steps:
     - script:
         code: echo ${WERCKER_GIT_COMMIT}

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-  xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.springframework.samples</groupId>
   <artifactId>spring-petclinic</artifactId>
-  <version>2.1.0</version>
+  <version>2.1.0.BUILD-SNAPSHOT</version>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -27,9 +28,6 @@
     <wro4j.version>1.8.0</wro4j.version>
 
     <jacoco.version>0.8.2</jacoco.version>
-    <!-- Added by Irshad -->
-    <imagetag>${git.commit.id.abbrev}</imagetag>
-    <maven.build.timestamp.format>yyyyMMdd-HHmmssSSS</maven.build.timestamp.format>
 
   </properties>
 
@@ -160,7 +158,6 @@
       <plugin>
         <groupId>pl.project13.maven</groupId>
         <artifactId>git-commit-id-plugin</artifactId>
-        <version>2.2.4</version>
         <executions>
           <execution>
             <goals>
@@ -169,8 +166,6 @@
           </execution>
         </executions>
         <configuration>
-          <prefix>git</prefix>
-          <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
           <verbose>true</verbose>
           <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
           <generateGitPropertiesFile>true</generateGitPropertiesFile>
@@ -212,101 +207,6 @@
           </dependency>
         </dependencies>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <version>2.21.0</version>
-        <configuration>
-          <classesDirectory>${project.build.outputDirectory}</classesDirectory>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <!--plugin>
-				<groupId>com.google.cloud.tools</groupId>
-				<artifactId>jib-maven-plugin</artifactId>
-				<version>0.9.7</version>
-				<configuration>
-					<to>
-						<image>registry.hub.docker.com/eddiewebb/circleci-k8s-demo:${version}-b${build.number}</image>
-					</to>
-					<container>
-						<jvmFlags>
-							<jvmFlag>-Dcircle_build_num=${build.number}</jvmFlag>
-							<jvmFlag>-Dcircle_commit=${commit.hash}</jvmFlag>
-							<jvmFlag>-Dcircle_user=${build.user}</jvmFlag>
-							<jvmFlag>-Dcircle_repo=${build.repo}</jvmFlag>
-							<jvmFlag>-Dcircle_workflow_guid=${circle.workflow}</jvmFlag>
-						</jvmFlags>
-						<ports>
-							<port>8080</port>
-						</ports>
-					</container>
-				</configuration>
-			</plugin-->
-      <!--plugin>
-        <groupId>com.google.cloud.tools</groupId>
-        <artifactId>jib-maven-plugin</artifactId>
-        <version>${jib.plugin.version}</version>
-        <configuration>
-          <to>
-            <image>${jib.image.repository}/${project.artifactId}-${maven.build.timestamp.format}</image>
-            <tags>
-              <tag>${project.version}</tag>
-              <tag>${imagetag}</tag>
-              <tag>latest</tag>
-            </tags>
-          </to>
-          <container>
-            <jvmFlags>
-              <jvmFlag>-Dcircle_build_num=${build.number}</jvmFlag>
-            </jvmFlags>
-            <useCurrentTimestamp>true</useCurrentTimestamp>
-          </container>
-          <mainClass>${main.class}</mainClass>
-        </configuration>
-      </plugin-->
-      <plugin>
-        <groupId>com.spotify</groupId>
-        <artifactId>dockerfile-maven-plugin</artifactId>
-        <version>1.4.9</version>
-        <executions>
-          <execution>
-            <id>tag-latest</id>
-            <phase>package</phase>
-            <goals>
-              <goal>build</goal>
-              <goal>tag</goal>
-              <!--goal>push</goal-->
-            </goals>
-            <configuration>
-              <tag>latest</tag>
-            </configuration>
-          </execution>
-          <execution>
-            <id>tag-version</id>
-            <phase>package</phase>
-            <goals>
-              <goal>build</goal>
-              <goal>tag</goal>
-              <!--goal>push</goal-->
-            </goals>
-            <configuration>
-              <tag>${git.commit.id.abbrev}</tag>
-            </configuration>
-          </execution>
-        </executions>
-        <configuration>
-          <repository>ibuchh/spring-petclinic</repository>
-        </configuration>
-      </plugin>
-
     </plugins>
   </build>
 

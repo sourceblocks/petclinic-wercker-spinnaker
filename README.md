@@ -1,1 +1,0 @@
-# petclinic-wercker-spinnaker

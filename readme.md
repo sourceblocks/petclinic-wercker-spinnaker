@@ -1,7 +1,7 @@
 # Spring PetClinic Sample Application [![Build Status](https://travis-ci.org/spring-projects/spring-petclinic.png?branch=master)](https://travis-ci.org/spring-projects/spring-petclinic/)
 
 ## Understanding the Spring Petclinic application with a few diagrams
-
+<a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
 
 ## Running petclinic locally
 Petclinic is a [Spring Boot](https://spring.io/guides/gs/spring-boot) application built using [Maven](https://spring.io/guides/gs/maven/). You can build a jar file and run it from the command line:
@@ -38,55 +38,6 @@ You could start MySql locally with whatever installer works for your OS, or with
 
 ```
 docker run -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -p 3306:3306 mysql:5.7.8
-docker exec -it mysql bash
-mysql -uroot -p
-
-Create the DB schema and the database tables by running the scirpts inside the initDB.sql and populateDB.sql files
-
-Create a jar file under target directory:
-
-mvn package -DskipTests=true
-
-Run the application using mysql profile
-
-java -Dspring.profiles.active=mysql -jar target\spring-petclinic-2.0.0.jar
-
-Run the application using hsqldb profile
-
-java -Dspring.profiles.active=hsqldb -jar target\spring-petclinic-2.0.0.jar
-```
-
-## Running Petclinic using Docker
-
-Inside the Dockerfile, create the last line as:
-
-ENTRYPOINT [ "sh", "-c", "java -Dspring.profiles.active=${ENV} -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
-
-Create a docker image and push it to the Docker Hub
-
-And while running the docker:
-
-```
-docker run --env ENV=mysql -d -p 8080:8080 <image id> 
-```
-This way, environment variable gets local as value and passes to Dockerfile when we bring up a container.
-
-You can also pass on the Spring Profile as an environment variable at the run time as:
-
-```
-$ docker run -e "SPRING_PROFILES_ACTIVE=prod" -p 8080:8080 -t ibuchh/spring-petclinic
-```
-
-## Petclinic environment variables
-
-```
-https://stackoverflow.com/questions/51655725/how-can-i-set-spring-boot-properties-from-docker-run-command?noredirect=1&lq=1
-
-http://www.littlebigextra.com/use-spring-profiles-docker-containers/
-
-https://www.mkyong.com/spring-boot/spring-boot-profile-based-properties-and-yaml-example/
-
-https://dzone.com/articles/spring-boot-profiles-1
 ```
 
 ## Working with Petclinic in your IDE
@@ -102,12 +53,10 @@ The following items should be installed in your system:
 
 ### Steps:
 
-<ul>
-1. On the command line
+1) On the command line
 ```
 git clone https://github.com/spring-projects/spring-petclinic.git
 ```
-
 2) Inside Eclipse or STS
 ```
 File -> Import -> Maven -> Existing Maven project
@@ -129,4 +78,54 @@ version. Otherwise, run the application by right clicking on the `PetClinicAppli
 4) Navigate to Petclinic
 
 Visit [http://localhost:8080](http://localhost:8080) in your browser.
-</ul>
+
+
+## Looking for something in particular?
+
+|Spring Boot Configuration | Class or Java property files  |
+|--------------------------|---|
+|The Main Class | [PetClinicApplication](https://github.com/spring-projects/spring-petclinic/blob/master/src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java) |
+|Properties Files | [application.properties](https://github.com/spring-projects/spring-petclinic/blob/master/src/main/resources) |
+|Caching | [CacheConfiguration](https://github.com/spring-projects/spring-petclinic/blob/master/src/main/java/org/springframework/samples/petclinic/system/CacheConfiguration.java) |
+
+## Interesting Spring Petclinic branches and forks
+
+The Spring Petclinic master branch in the main [spring-projects](https://github.com/spring-projects/spring-petclinic)
+GitHub org is the "canonical" implementation, currently based on Spring Boot and Thymeleaf. There are
+[quite a few forks](https://spring-petclinic.github.io/docs/forks.html) in a special GitHub org
+[spring-petclinic](https://github.com/spring-petclinic). If you have a special interest in a different technology stack
+that could be used to implement the Pet Clinic then please join the community there.
+
+
+## Interaction with other open source projects
+
+One of the best parts about working on the Spring Petclinic application is that we have the opportunity to work in direct contact with many Open Source projects. We found some bugs/suggested improvements on various topics such as Spring, Spring Data, Bean Validation and even Eclipse! In many cases, they've been fixed/implemented in just a few days.
+Here is a list of them:
+
+| Name | Issue |
+|------|-------|
+| Spring JDBC: simplify usage of NamedParameterJdbcTemplate | [SPR-10256](https://jira.springsource.org/browse/SPR-10256) and [SPR-10257](https://jira.springsource.org/browse/SPR-10257) |
+| Bean Validation / Hibernate Validator: simplify Maven dependencies and backward compatibility |[HV-790](https://hibernate.atlassian.net/browse/HV-790) and [HV-792](https://hibernate.atlassian.net/browse/HV-792) |
+| Spring Data: provide more flexibility when working with JPQL queries | [DATAJPA-292](https://jira.springsource.org/browse/DATAJPA-292) |
+
+
+# Contributing
+
+The [issue tracker](https://github.com/spring-projects/spring-petclinic/issues) is the preferred channel for bug reports, features requests and submitting pull requests.
+
+For pull requests, editor preferences are available in the [editor config](.editorconfig) for easy use in common text editors. Read more and download plugins at <http://editorconfig.org>. If you have not previously done so, please fill out and submit the [Contributor License Agreement](https://cla.pivotal.io/sign/spring).
+
+# License
+
+The Spring PetClinic sample application is released under version 2.0 of the [Apache License](http://www.apache.org/licenses/LICENSE-2.0).
+
+[spring-petclinic]: https://github.com/spring-projects/spring-petclinic
+[spring-framework-petclinic]: https://github.com/spring-petclinic/spring-framework-petclinic
+[spring-petclinic-angularjs]: https://github.com/spring-petclinic/spring-petclinic-angularjs 
+[javaconfig branch]: https://github.com/spring-petclinic/spring-framework-petclinic/tree/javaconfig
+[spring-petclinic-angular]: https://github.com/spring-petclinic/spring-petclinic-angular
+[spring-petclinic-microservices]: https://github.com/spring-petclinic/spring-petclinic-microservices
+[spring-petclinic-reactjs]: https://github.com/spring-petclinic/spring-petclinic-reactjs
+[spring-petclinic-graphql]: https://github.com/spring-petclinic/spring-petclinic-graphql
+[spring-petclinic-kotlin]: https://github.com/spring-petclinic/spring-petclinic-kotlin
+[spring-petclinic-rest]: https://github.com/spring-petclinic/spring-petclinic-rest

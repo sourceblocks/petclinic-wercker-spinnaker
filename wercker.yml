@@ -2,7 +2,7 @@ box: openjdk:8-jdk
 build:
   steps:
     - wercker/maven:
-      goals: package
+      goals: package -DskipTests
       cache_repo: true
       version: 3.5.2
     - internal/docker-build:

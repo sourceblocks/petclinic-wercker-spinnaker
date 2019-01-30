@@ -4,7 +4,7 @@ build:
     - id: petclinic
   steps:
     - java/maven:
-      goals: install
+      goals: package
       cache_repo: true
       version: 3.5.2
     - internal/docker-build:

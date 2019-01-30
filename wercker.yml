@@ -15,8 +15,7 @@ push:
     - internal/docker-push:
         # specify the image to be pushed - this is the one we created earlier
         image-name: petclinic-wercker-spinnaker
-        tag: ${WERCKER_GIT_COMMIT} latest
+        tag: latest
         username: $USERNAME # Registry username
         password: $PASSWORD # Registry password
-        registry: https://hub.docker.com
         repository: $USERNAME/petclinic-wercker-spinnaker

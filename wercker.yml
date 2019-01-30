@@ -1,10 +1,12 @@
-box: combient/java-mvn
+box: openjdk:8-jdk
 build:
   services:
     - id: petclinic
   steps:
-    - script:
-        code: 'mvn package'
+    - java/maven:
+      goals: install
+      cache_repo: true
+      version: 3.5.2
     - internal/docker-build:
         dockerfile: Dockerfile
         image-name: petclinic-wercker-spinnaker

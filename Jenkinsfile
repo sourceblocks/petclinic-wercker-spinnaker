@@ -17,6 +17,7 @@ pipeline {
       agent any
       steps {
         sh 'docker build -t ibuchh/spring-petclinic:${GIT_COMMIT:0:7} .'
+        sh 'docker build -t ibuchh/spring-petclinic:latest .'
       }
     }
   }

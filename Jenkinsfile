@@ -16,7 +16,7 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t ibuchh/spring-petclinic:${GIT_COMMIT} .'
+        sh 'docker build -t ibuchh/spring-petclinic:${GIT_REVISION,length=6} .'
       }
     }
   }

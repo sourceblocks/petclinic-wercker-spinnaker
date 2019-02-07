@@ -3,7 +3,7 @@
 pipeline {
   agent none
   stages {
-    stage('Maven Install') {
+    stage('Build & Package') {
       agent {
         docker {
           image 'maven:3.5.0'
@@ -18,6 +18,16 @@ pipeline {
       steps {
         sh 'docker build -t ibuchh/spring-petclinic:${GIT_COMMIT:0:7} .'
         sh 'docker build -t ibuchh/spring-petclinic:latest .'
+      }
+    }
+    stage('Docker Push') {
+      agent any
+      steps {
+        withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DockerHubPassword', usernameVariable: 'DockerHubUser')]) {
+          sh "docker login -u ${env.DockerHubUser} -p ${env.DockerHubPassword}"
+          sh 'docker push ibuchh/spring-petclinic:${GIT_COMMIT:0:7}'
+          sh 'docker push ibuchh/spring-petclinic:latest'
+        }
       }
     }
   }

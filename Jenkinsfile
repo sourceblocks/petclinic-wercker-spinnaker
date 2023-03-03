@@ -16,8 +16,8 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t sourceblocks/spring-petclinic:${GIT_COMMIT:0:7} .'
-        sh 'docker build -t sourceblocks/spring-petclinic:latest .'
+        sh 'docker build -t alltimejk/spring-petclinic:${GIT_COMMIT:0:7} .'
+        sh 'docker build -t alltimejk/spring-petclinic:latest .'
       }
     }
     stage('Docker Push') {
@@ -25,8 +25,8 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DockerHubPassword', usernameVariable: 'DockerHubUser')]) {
           sh "docker login -u ${env.DockerHubUser} -p ${env.DockerHubPassword}"
-          sh 'docker push sourceblocks/spring-petclinic:${GIT_COMMIT:0:7}'
-          sh 'docker push sourceblocks/spring-petclinic:latest'
+          sh 'docker push alltimejk/spring-petclinic:${GIT_COMMIT:0:7}'
+          sh 'docker push alltimejk/spring-petclinic:latest'
         }
       }
     }
